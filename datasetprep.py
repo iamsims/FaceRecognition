@@ -18,6 +18,7 @@ def augment_dataset(no_of_folders,no_of_faces,scale_factor):
     return updated_no_of_faces,no_of_folders*no_of_faces*2*scale_factor
 
 
+
 def add(folder_num,no_of_people,no_of_faces, url):
     #send url of the camera from outside
     

@@ -1,4 +1,6 @@
-#API req so that it doesn't comppile everytime i run the program 
+#once run, no need to run again
+# only use predict f the pickle file
+
 from sklearn.model_selection import train_test_split
 from keras import backend as K
 from keras.layers import Activation
@@ -6,6 +8,7 @@ from keras.layers import Input, Lambda, Dense, Dropout, Convolution2D, MaxPoolin
 from keras.models import Sequential, Model
 from keras.optimizers import RMSprop
 import datasetprep
+import pickle
 
 initial_no_of_folders=43
 initial_no_of_faces=10
@@ -13,6 +16,10 @@ size = 2
 sample_factor=25
 
 #no_of_faces,total_sample_size=datasetprep.augment_dataset(initial_no_of_folders,initial_no_of_faces,sample_factor)
+#after augmentation 
+no_of_folders=43
+no_of_faces=20
+total_sample_size=no_of_folders*no_of_faces*sample_factor
 
 X, Y = datasetprep.get_data(size,initial_no_of_folders,no_of_faces, total_sample_size)
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=.25)
@@ -61,31 +68,22 @@ def contrastive_loss(y_true, y_pred):
 def compute_accuracy(predictions, labels):
     return labels[predictions.ravel() < 0.5].mean()
 
-def train():
-    input_dim = x_train.shape[2:]
-    img_a = Input(shape=input_dim)
-    img_b = Input(shape=input_dim)
 
-    base_network = build_base_network(input_dim)
-    feat_vecs_a = base_network(img_a)
-    feat_vecs_b = base_network(img_b)
-
-    distance = Lambda(euclidean_distance, output_shape=eucl_dist_output_shape)([feat_vecs_a, feat_vecs_b])
-
-    epochs = 13
-    rms = RMSprop()
-
-    model = Model(input=[img_a, img_b], output=distance)
-
-    model.compile(loss=contrastive_loss, optimizer=rms)
-
-    img_1 = x_train[:, 0]
-    img_2 = x_train[:, 1]
-
-    model.fit([img_1, img_2], y_train, validation_split=.25,
-              batch_size=128, verbose=2, nb_epoch=epochs)
-
-    pred = model.predict([x_test[:, 0], x_test[:, 1]])
-    print(compute_accuracy(pred, y_test))
-    return model
-
+input_dim = x_train.shape[2:]
+img_a = Input(shape=input_dim)
+img_b = Input(shape=input_dim)
+base_network = build_base_network(input_dim)
+feat_vecs_a = base_network(img_a)
+feat_vecs_b = base_network(img_b)
+distance = Lambda(euclidean_distance, output_shape=eucl_dist_output_shape)([feat_vecs_a, feat_vecs_b])
+epochs = 13
+rms = RMSprop()
+model = Model(input=[img_a, img_b], output=distance)
+model.compile(loss=contrastive_loss, optimizer=rms)
+img_1 = x_train[:, 0]
+img_2 = x_train[:, 1]
+model.fit([img_1, img_2], y_train, validation_split=.25,
+          batch_size=128, verbose=2, nb_epoch=epochs)
+pred = model.predict([x_test[:, 0], x_test[:, 1]])
+print(compute_accuracy(pred, y_test))
+pickle.dump(model, open('models/final_prediction.pickle', 'wb'))
