@@ -8,11 +8,17 @@ def capture(url):
     image=imgResp.read()
     imgNp=np.array(bytearray(image),dtype=np.uint8)
     img_shot=cv2.imdecode(imgNp,-1)
-    cv2.imshow("cropped", img_shot)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
+   # cv2.imshow("cropped", img_shot)
+   # cv2.waitKey(0)
+   # cv2.destroyAllWindows()
+    padding=10
     x1,y1,x2,y2=detect_face(img_shot)
+    
+    x1-=padding
+    y1-=padding
+    x2+=padding
+    y2+=padding
+
     shot_cropped_img = img_shot[y1:y2, x1:x2]
     cv2.imshow("cropped", shot_cropped_img)
     cv2.waitKey(0)

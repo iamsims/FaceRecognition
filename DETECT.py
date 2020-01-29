@@ -9,5 +9,7 @@ def detect_face(pixels):
 	    x, y, width, height = box
 	    x2, y2 = x + width, y + height
 	    break
-        
+    
+
+    
     return x,y,x2,y2
