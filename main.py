@@ -29,8 +29,7 @@ sum=np.zeros(no_of_folders)
 #        sum[i]+=pred
 #        
 #    sum[i]=sum[i]/10
-           
-
+        
 
 
 img = read_image('authorized_person/' + str(9) + '/' + str(1) + '.pgm', 'rw+')
