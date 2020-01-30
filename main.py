@@ -1,7 +1,7 @@
-from ImageProcessing import capture
+from Dependencies.ImageProcessing import capture
 import pickle
 import numpy as np
-from IMREAD import read_image
+from Dependencies.IMREAD import read_image
 
 modelfile = 'models/final_prediction_new.pickle'
 print('here')
