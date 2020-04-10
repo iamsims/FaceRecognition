@@ -1,3 +1,5 @@
+A smart home automation tool for Locus 2020 by implementation of Siamese Model to recognize faces.
+
 
 To run and use for face recognition
 1.clone  the repo 
