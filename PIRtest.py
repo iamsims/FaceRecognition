@@ -4,7 +4,8 @@ import numpy as np
 from Dependencies.IMREAD import read_image
 
 import serial
-ser=serial.Serial('COM3',9600)
+#ser=serial.Serial('COM3',9600)   set this accordingly
+#url='url provided  by ip webcam'
 
 modelfile = 'models/final_prediction_new.pickle'
 model = pickle.load(open(modelfile, 'rb'))
@@ -12,7 +13,6 @@ model = pickle.load(open(modelfile, 'rb'))
 no_of_folders=9
 no_of_images=10
 size=2
-url='http://10.100.60.253:8080/shot.jpg?rnd=9200110'
 
 print('Active')
 
@@ -29,7 +29,7 @@ while 1:
     print('Responded by ultrasensor')
 
     try:
-        img=capture(url)
+ #       img=capture(url)
        # img = read_image('authorized_person/' + str(1) + '/' + str(1) + '.pgm', 'rw+')
         img = img[::size, ::size]/255
         x_match[0,1,0,:,:]=img

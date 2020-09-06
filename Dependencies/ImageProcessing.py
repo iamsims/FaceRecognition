@@ -1,7 +1,7 @@
 import urllib.request
 import numpy as np
 import cv2
-from DETECT import detect_face
+from .DETECT import detect_face
 
 def capture(url):
     imgResp=urllib.request.urlopen(url)
