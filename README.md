@@ -32,4 +32,9 @@ iv. add contrastive loss if contrastive loss is not found in losses.py file :
 def contrastive_loss(y_true, y_pred):
     margin = 1
     return K.mean(y_true * K.square(y_pred) + (1 - y_true) * K.square(K.maximum(margin - y_pred, 0)))
+    
+    
+To - do :
+1. Create interactive README.
+2. Create proper abstraction and make code cleaner.
 
