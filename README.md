@@ -4,13 +4,14 @@ To run and use for face recognition, clone  the repo and,
 
 
 For Windows:
-i.download python 3.7.4
-ii.make virtualenv by specifying path to the python by the given command:
+
+i. download python 3.7.4
+ii. make virtualenv by specifying path to the python by the given command:
    virtualenv -p PATH ENVIRONMENTNAME 
    e.g. virtualenv -p "C:\Python37_64\python.exe" SiamseseEnv
-iii.install requirements by following command:
+iii. install requirements by following command:
    pip install -r requirements.txt
-iv.run main file
+iv. run main file
 v. add contrastive loss if contrastive loss is not found in losses.py file :
 
 def contrastive_loss(y_true, y_pred):
@@ -19,14 +20,14 @@ def contrastive_loss(y_true, y_pred):
 
 
 For Linux:
-i.Install virtual environment with python = 3.7
+i. Install virtual environment with python = 3.7
  for Debian:  sudo apt install python3.7-venv
               python3.7 -m venv env37
               source env37/bin/activate
 
-ii.install requirements by following command:
+ii. install requirements by following command:
    pip install -r requirements.txt
-iii.run main file 
+iii. run main file 
 iv. add contrastive loss if contrastive loss is not found in losses.py file :
 
 def contrastive_loss(y_true, y_pred):
