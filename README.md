@@ -1,41 +1,49 @@
-A smart home automation tool for Locus 2020 by implementation of Siamese Model to recognize faces.
+### A smart home automation tool for Locus 2020 by implementation of Siamese Model to recognize faces.
 
-To run and use for face recognition, clone  the repo and,
+### Installation
+**Cloning the repository For code**:
+
+               #git clone https://github.com/simran347/FaceRecognition.git
+
+      
+
+1. #### For Windows:
+
+* download Python 3.7
+* Create the Virtual Environment 
+
+		virtualenv -p PATH ENVIRONMENTNAME 
+		#Activating virtual env
+		\path\to\env\Scripts\activate
+
+* Install dependencies:
+
+      pip install -r requirements.txt
 
 
-For Windows:
+2. #### For Linux:
 
-i. download python 3.7.4
-ii. make virtualenv by specifying path to the python by the given command:
-   virtualenv -p PATH ENVIRONMENTNAME 
-   e.g. virtualenv -p "C:\Python37_64\python.exe" SiamseseEnv
-iii. install requirements by following command:
-   pip install -r requirements.txt
-iv. run main file
-v. add contrastive loss if contrastive loss is not found in losses.py file :
+* Install virtual environment with python = 3.7
+ 
+      sudo apt install python3.7-venv
 
-def contrastive_loss(y_true, y_pred):
+* Create the Virtual Environment
+ 
+		#Creating Virtual Env
+      python3.7 -m venv env37
+      #Activating virtual env
+      source env37/bin/activate
+ 
+* Install Dependencies:
+
+		pip install -r requirements.txt 
+
+
+### Run the program 
+1. Run main file  
+2. Add contrastive loss if contrastive loss is not found in losses.py file:
+
+`def contrastive_loss(y_true, y_pred):
     margin = 1
-    return K.mean(y_true * K.square(y_pred) + (1 - y_true) * K.square(K.maximum(margin - y_pred, 0)))
-
-
-For Linux:
-i. Install virtual environment with python = 3.7
- for Debian:  sudo apt install python3.7-venv
-              python3.7 -m venv env37
-              source env37/bin/activate
-
-ii. install requirements by following command:
-   pip install -r requirements.txt
-iii. run main file 
-iv. add contrastive loss if contrastive loss is not found in losses.py file :
-
-def contrastive_loss(y_true, y_pred):
-    margin = 1
-    return K.mean(y_true * K.square(y_pred) + (1 - y_true) * K.square(K.maximum(margin - y_pred, 0)))
-    
-    
-To - do :
-1. Create interactive README.
-2. Create proper abstraction and make code cleaner.
+    return K.mean(y_true * K.square(y_pred) + (1 - y_true) * K.square(K.maximum(margin - y_pred, 0)))`
 
